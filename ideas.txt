@@ -1,0 +1,43 @@
+
+https://docs.google.com/document/d/11F6_1Vvp26Xklg6clGKsQ746IRlHwBjRqkr6_D2Xmsk/edit?usp=sharing
+
+General Ideas:
+  Afternoon sun, Get to circuit breaker/basement as quick as possible before sun sets
+  Each level is a separate scene
+  goes down a building with increasingly less lighting from outside
+  Can use flashlight, gets feedback on how much the flashlight is used
+  Therapist can dim the rooms with the sun a bit more
+
+Tasks for the patient:
+  Picking up tools, keys, or batteries
+  Fixing jammed doors
+  Get to the next level 
+
+Level 2: 
+  More batteries from therapist
+  Better lighting from the sun
+  Controlled by therapist
+  Brightness /focus of the flashlight
+  Position of the sun/passage of time
+  Possible door jam towards the bottom of the building, has to be fixed while it gets dark
+
+Level 3
+  Keep track of how long it takes them to get through level
+  Track flashlight usage
+  Track how often they check the watch
+  Do surveys between each level
+
+Tasks to complete:
+- Create a working flashlight object with programmable width
+- Create a working “sunset”
+- Create clocks that are connected to the current sunlight
+- Modeling the watch with info
+  The ability to teleport around the room
+  The ability to pickup/handle objects in the environment
+  Opening and closing doors
+  The ability to “fix” jammed doors
+  Missing screws, or slightly unscrewed ones
+  Creating models of each level, including doors, placing objects (tools, batteries, keys)
+  Creating in game survey between each levels (in the stairway?)
+  Giving therapist controls
+  Tracking what the user is doing
