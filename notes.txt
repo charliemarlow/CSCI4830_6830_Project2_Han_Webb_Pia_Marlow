@@ -1,0 +1,10 @@
+- to make it truly dark we'll need to mess with global illumination 
+settings
+
+- each level it could get progressively darker
+
+- or at a certain level of lighting we can change it
+
+- changing RenderSettings.reflectionIntensity = 0
+- and RenderSettings.ambientIntensity = 0 
+- should allow "true" darkness
