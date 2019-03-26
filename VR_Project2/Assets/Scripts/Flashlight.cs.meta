@@ -3,7 +3,12 @@ guid: c62d5ef6a44a747bf981adff465707fe
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - bar: {instanceID: 0}
+  - block1: {instanceID: 0}
+  - block2: {instanceID: 0}
+  - block3: {instanceID: 0}
+  - lightBeam: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

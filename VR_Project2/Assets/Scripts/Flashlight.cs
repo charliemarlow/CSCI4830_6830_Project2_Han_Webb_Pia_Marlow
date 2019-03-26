@@ -65,7 +65,7 @@ public class Flashlight : MonoBehaviour
             rend3.enabled = false;
             rend2.enabled = false;
             rend1.enabled = true;
-            rend1.material.color = new Color(200, 0, 0);  //set last block to red
+            rend1.material.color = new Color(150, 0, 0);  //set last block to red
         }
 
         else if (batteryLevel <= 0) //turn off light if batteryLevel reaches zero
@@ -76,5 +76,25 @@ public class Flashlight : MonoBehaviour
             rend1.enabled = false;
             lt.enabled = false;
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)  //function to replace batteries
+    {
+        if(collision.rigidbody == null)
+        {
+            return;
+        }
+
+        Rigidbody rb = collision.rigidbody;
+        Battery b = rb.GetComponent<Battery>();
+
+        if (b == null)
+        {
+            Debug.Log("Hit by " + rb.name);
+            return;
+        }
+
+        Debug.Log("Batteries replaced.");
+        batteryLevel = 3;
     }
 }
