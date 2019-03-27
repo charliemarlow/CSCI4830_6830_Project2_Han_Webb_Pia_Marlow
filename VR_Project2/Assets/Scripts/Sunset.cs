@@ -14,6 +14,8 @@ public class Sunset : MonoBehaviour
 
     public int speed;
     public int days;
+    public float ambientLightMultiplier;
+    public float ambientIntensity;
     // Start is called before the first frame update
     void Start()
     {
@@ -26,6 +28,26 @@ public class Sunset : MonoBehaviour
         {
             time += Time.deltaTime * speed;
             float offsetTime = time + timeOffset;
+            Debug.Log("Do something");
+            if(offsetTime >= 54000 && offsetTime <= 58400) {
+                Debug.Log("Ambient light multiplier" + ambientLightMultiplier);
+                ambientLightMultiplier +=  offsetTime /100000;
+                ambientIntensity = 1 / ambientLightMultiplier;
+                RenderSettings.reflectionIntensity = 1 / ambientLightMultiplier;
+                Debug.Log("Ambient light multiplier" + ambientLightMultiplier);
+                Debug.Log("Reflection intensity " + 1 / ambientLightMultiplier);
+                RenderSettings.ambientIntensity = 1 / ambientLightMultiplier;
+            }else if(offsetTime >= 58400 && ambientLightMultiplier > 0) {
+                ambientIntensity -= 1 / Mathf.Log(offsetTime, 2) ;
+                Debug.Log("Go black");
+                RenderSettings.reflectionIntensity = ambientIntensity;
+                RenderSettings.ambientIntensity = ambientIntensity;
+            }else if(offsetTime >= 58400) {
+
+                Debug.Log("Go black");
+                RenderSettings.reflectionIntensity = 0;
+                RenderSettings.ambientIntensity = 0;
+            }
 
             float secondsInADay = 60 * 60 * 24;
             float halfDay = secondsInADay / 2;
