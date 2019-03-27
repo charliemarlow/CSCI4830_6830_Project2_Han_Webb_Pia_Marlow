@@ -30,19 +30,10 @@ public class Sunset : MonoBehaviour
             float offsetTime = time + timeOffset;
             Debug.Log("Do something");
             if(offsetTime >= 54000 && offsetTime <= 58100) {
-                Debug.Log("Ambient light multiplier" + ambientLightMultiplier);
-                ambientLightMultiplier +=  Mathf.Sqrt(offsetTime);
-                ambientIntensity = 1 / ambientLightMultiplier;
-                RenderSettings.reflectionIntensity = ambientIntensity;
-                Debug.Log("Ambient light multiplier" + ambientLightMultiplier);
-                Debug.Log("Reflection intensity " + 1 / ambientLightMultiplier);
-                RenderSettings.ambientIntensity = ambientIntensity;
-            }else if(offsetTime >= 58100 && ambientLightMultiplier > 0) {
-                ambientIntensity -= 1 /Mathf.Sqrt(offsetTime) ;
-                Debug.Log("Go black");
+                ambientIntensity = (58100f - offsetTime) / 5000f;
                 RenderSettings.reflectionIntensity = ambientIntensity;
                 RenderSettings.ambientIntensity = ambientIntensity;
-            }else if(offsetTime >= 58100) {
+            }else if(offsetTime >= 58101) {
 
                 Debug.Log("Go black");
                 RenderSettings.reflectionIntensity = 0;

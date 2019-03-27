@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
+    public OVRGrabber left;
+    public OVRGrabber right;
+    public OVRGrabbable grabbableFlashlight;
+
     public int batteryLevel;                   //level of charge in battery
     public GameObject bar;                     //battery indicator bar
     public GameObject block1, block2, block3;  //blocks for each charge level
@@ -25,23 +29,54 @@ public class Flashlight : MonoBehaviour
 
     }
 
+    float getIndexTriggerState(bool isLeft) {
+        float indexTriggerState = 0.0f;
+        if (isLeft) {
+            indexTriggerState = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.LTouch);
+        }
+        else {
+            indexTriggerState = OVRInput.Get(OVRInput.Axis1D.PrimaryIndexTrigger, OVRInput.Controller.RTouch);
+        }
+        return indexTriggerState;
+    }
+
     // Update is called once per frame
     void Update()
     {
         lt.spotAngle = lightRadius;     //set spot light angle to specified value
 
-       if (Input.GetKeyDown(KeyCode.Mouse0))    //turn on/off light when button is pressed
-        {
+        bool isLeft;
 
+        if (grabbableFlashlight.grabbedBy == left)
+        {
+            isLeft = true;
+        }
+
+        else {
+            isLeft = false;
+        }
+
+
+
+
+        float lastTimeOn = 0.0f;
+       float indexTriggerState = getIndexTriggerState(isLeft);
+        
+       if (indexTriggerState > .5  && Time.time - lastTimeOn > 1)    //turn on/off light when button is pressed
+        {
+            Debug.Log("Trigger pulled");
             if (lt.enabled == false && batteryLevel > 0)
             {
+                Debug.Log("Light enabled");
                 lt.enabled = true;
             }
 
             else
             {
+                Debug.Log("Light not enabled");
                 lt.enabled = false;
             }
+            lastTimeOn = Time.time;
         }
 
 
