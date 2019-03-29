@@ -40,10 +40,13 @@ public class Sunset : MonoBehaviour
                 ambientIntensity = (sunsetEnd - offsetTime) / scaleDownFactor;
                 RenderSettings.reflectionIntensity = ambientIntensity;
                 RenderSettings.ambientIntensity = ambientIntensity;
-            }else if(offsetTime >= sunsetEnd) {
+                sunLight.intensity = sunLight.intensity = (totalNight - offsetTime) / (scaleDownFactor *2);
+            }
+            else if(offsetTime >= sunsetEnd) {
                 // turn off ambient lighting
                 RenderSettings.reflectionIntensity = 0;
                 RenderSettings.ambientIntensity = 0;
+                
             }
 
             // set up variables for controlling sun rotation/fog settings
@@ -52,12 +55,19 @@ public class Sunset : MonoBehaviour
             float quarterDay = halfDay / 2;
 
             // rotate sun and calculate intensity
-            sun.rotation = Quaternion.Euler(new Vector3((offsetTime - quarterDay) / 64000 * 360, 0, 0));
+            if (offsetTime <= totalNight)
+            {
+                sun.rotation = Quaternion.Euler(new Vector3((offsetTime - quarterDay) / 64000 * 360, 0, 0));
+            }
             intensity = 1 - ((halfDay - offsetTime) / halfDay * -1);
 
             // set fog color
             RenderSettings.fogColor = Color.Lerp(fognight, fogday, intensity * intensity);
-            sunLight.intensity = intensity;
+
+            if (offsetTime <= sunsetStart)
+            {
+                sunLight.intensity = intensity;
+            }
 
             // turn off sun, exit coroutine
             if(offsetTime >= totalNight)

@@ -7,7 +7,6 @@ public class TherapistInterface : MonoBehaviour
 
     public Flashlight flashlight;
     public Sunset sunset;
-    public Battery battery;
 
     public 
 
