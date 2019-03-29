@@ -293,8 +293,6 @@ MonoBehaviour:
   fogday: {r: 0.5, g: 0.5, b: 0.5, a: 1}
   fognight: {r: 0, g: 0, b: 0, a: 1}
   speed: 20
-  days: 0
-  ambientLightMultiplier: 1
   ambientIntensity: 0
 --- !u!1 &185062419
 GameObject:

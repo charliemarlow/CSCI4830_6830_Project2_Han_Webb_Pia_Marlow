@@ -11,6 +11,7 @@ public class Flashlight : MonoBehaviour
     public int batteryLevel;                   //level of charge in battery
     public GameObject bar;                     //battery indicator bar
     public GameObject block1, block2, block3;  //blocks for each charge level
+    public GameObject fakeLight;               // fake cylinder that gives appearance of a lit light
     public GameObject lightBeam;               //spot light object
     public float lightRadius;                  //radius of spot light
     private Color batteryGreen;                //full battery color
@@ -26,6 +27,7 @@ public class Flashlight : MonoBehaviour
         lt = lightBeam.GetComponent<Light>();
         batteryGreen = rend3.material.color;
         lightBeam.GetComponent<Light>().enabled = false;    //initialize light to off
+        fakeLight.SetActive(false);
 
     }
 
@@ -69,12 +71,14 @@ public class Flashlight : MonoBehaviour
             {
                 Debug.Log("Light enabled");
                 lt.enabled = true;
+                fakeLight.SetActive(true);
             }
 
             else
             {
                 Debug.Log("Light not enabled");
                 lt.enabled = false;
+                fakeLight.SetActive(false);
             }
             lastTimeOn = Time.time;
         }
