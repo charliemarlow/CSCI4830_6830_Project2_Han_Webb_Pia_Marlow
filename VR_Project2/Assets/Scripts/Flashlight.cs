@@ -63,8 +63,8 @@ public class Flashlight : MonoBehaviour
 
         float lastTimeOn = 0.0f;
        float indexTriggerState = getIndexTriggerState(isLeft);
-        
-       if (indexTriggerState > .5  && Time.time - lastTimeOn > 1)    //turn on/off light when button is pressed
+        bool isGrabbed = grabbableFlashlight.grabbedBy == left || grabbableFlashlight.grabbedBy == right;
+       if (indexTriggerState > .5  && Time.time - lastTimeOn > 1 && isGrabbed)    //turn on/off light when button is pressed
         {
             Debug.Log("Trigger pulled");
             if (lt.enabled == false && batteryLevel > 0)

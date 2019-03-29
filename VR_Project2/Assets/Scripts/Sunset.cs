@@ -5,15 +5,21 @@ using UnityEngine;
 public class Sunset : MonoBehaviour
 {
     public float timeOffset; // amount of time, in seconds, to offset from sunrise
-    public float time;  
+    private float time;  
     public Transform sun;    // directional lights transform
     public Light sunLight;  // sunlight
-    public float intensity; // how intense the light is
+    private float intensity; // how intense the light is
     public Color fogday = Color.grey;  // color of fog during the day
     public Color fognight = Color.black;  // color of fog at night
 
     public int speed;   // speed of sunset 
-    public float ambientIntensity;  // intensity of ambient light
+    private float ambientIntensity;  // intensity of ambient light
+
+    public float sunsetStart;
+    public float sunsetEnd = 54000;
+    public float totalNight = 58100;
+    public float scaleDownFactor = 5000;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -28,12 +34,6 @@ public class Sunset : MonoBehaviour
         {
             time += Time.deltaTime * speed;
             float offsetTime = time + timeOffset;
-
-            // set up variables for controlling ambient light during sunset
-            float sunsetStart = 54000;
-            float sunsetEnd = 58100;
-            float totalNight = 60000;
-            float scaleDownFactor = 5000;
 
             if(offsetTime >= sunsetStart && offsetTime <= sunsetEnd) {
                 // scale down ambient lighting during sunset
