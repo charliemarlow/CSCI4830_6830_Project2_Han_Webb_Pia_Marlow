@@ -18,6 +18,9 @@ public class Flashlight : MonoBehaviour
     private Renderer rend1, rend2, rend3;      //renderers for each battery block
     private Light lt;                          //spot light component
 
+    public bool isLit;
+    public float intensity;
+    public float lightRange;
     // Start is called before the first frame update
     void Start()
     {
@@ -27,7 +30,15 @@ public class Flashlight : MonoBehaviour
         lt = lightBeam.GetComponent<Light>();
         batteryGreen = rend3.material.color;
         lightBeam.GetComponent<Light>().enabled = false;    //initialize light to off
-        fakeLight.SetActive(false);
+        toggleFlashlight(false);
+
+    }
+
+    public void toggleFlashlight(bool on)
+    {
+        lt.enabled = on;
+        fakeLight.SetActive(on);
+        isLit = on;
 
     }
 
@@ -45,7 +56,9 @@ public class Flashlight : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        lt.intensity = intensity;
         lt.spotAngle = lightRadius;     //set spot light angle to specified value
+        lt.range = lightRange;
 
         bool isLeft;
 
@@ -70,15 +83,13 @@ public class Flashlight : MonoBehaviour
             if (lt.enabled == false && batteryLevel > 0)
             {
                 Debug.Log("Light enabled");
-                lt.enabled = true;
-                fakeLight.SetActive(true);
+                toggleFlashlight(true);
             }
 
             else
             {
                 Debug.Log("Light not enabled");
-                lt.enabled = false;
-                fakeLight.SetActive(false);
+                toggleFlashlight(false);
             }
             lastTimeOn = Time.time;
         }
@@ -113,7 +124,7 @@ public class Flashlight : MonoBehaviour
             rend3.enabled = false;
             rend2.enabled = false;
             rend1.enabled = false;
-            lt.enabled = false;
+            toggleFlashlight(false);
         }
     }
 

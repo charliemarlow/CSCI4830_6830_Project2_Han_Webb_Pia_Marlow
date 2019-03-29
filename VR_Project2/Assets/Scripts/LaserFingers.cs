@@ -37,22 +37,29 @@ public class LaserFingers : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RaycastHit hit;
-        if(Physics.Raycast(new Ray(laser.transform.position, laser.transform.forward), out hit, maxLaserDistance)){
-            laser.length = hit.distance;    // shortens the laser
-            if (getIndexTriggerState() >= .5)
+        // only use laser fingers when taking a survey
+        if (surveyTime)
+        {
+            laser.gameObject.SetActive(true);
+            RaycastHit hit;
+            if (Physics.Raycast(new Ray(laser.transform.position, laser.transform.forward), out hit, maxLaserDistance))
             {
-                Debug.Log("Selected " + hit.collider.attachedRigidbody);
+                laser.length = hit.distance;    // shortens the laser
+
+                // use index trigger to select an object
+                if (getIndexTriggerState() >= .5)
+                {
+                    Debug.Log("Selected " + hit.collider.attachedRigidbody);
+                }
+            }
+            else
+            {
+                laser.length = maxLaserDistance;
             }
         }
         else
         {
-            laser.length = maxLaserDistance;
-        }
-        if (surveyTime)
-        {
-            float indexTriggerValue = getIndexTriggerState();
-            laser.length = 5f;
+            laser.gameObject.SetActive(false);
         }
         
     }

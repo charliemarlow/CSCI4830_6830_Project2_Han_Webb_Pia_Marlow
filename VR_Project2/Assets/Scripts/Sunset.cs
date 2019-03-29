@@ -12,7 +12,7 @@ public class Sunset : MonoBehaviour
     public Color fogday = Color.grey;  // color of fog during the day
     public Color fognight = Color.black;  // color of fog at night
 
-    public int speed;   // speed of sunset 
+    public float speed;   // speed of sunset 
     private float ambientIntensity;  // intensity of ambient light
 
     public float sunsetStart;
