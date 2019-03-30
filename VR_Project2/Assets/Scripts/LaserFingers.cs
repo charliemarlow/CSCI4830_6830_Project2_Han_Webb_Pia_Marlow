@@ -9,13 +9,18 @@ public class LaserFingers : MonoBehaviour
 
     public float maxLaserDistance;
 
+    public GameManager gm;
+
     public Laser laser;
+
+    private string[] tagArray = { "1", "2", "3", "4", "5" };
+    private Renderer lastColored;
 
     // Start is called before the first frame update
     void Start()
     {
         surveyTime = false;
-        
+        lastColored = null;
     }
 
 
@@ -49,7 +54,18 @@ public class LaserFingers : MonoBehaviour
                 // use index trigger to select an object
                 if (getIndexTriggerState() >= .5)
                 {
-                    Debug.Log("Selected " + hit.collider.attachedRigidbody);
+                    for (int i = 0; i < tagArray.Length; i++)
+                    {
+                        if (hit.collider.CompareTag(tagArray[i]))
+                        {
+                            Debug.Log("Selected Number " + tagArray[i]);
+                            gm.changeColor(hit);
+                            break;
+                        }else if (hit.collider.CompareTag("next"))
+                        {
+                            gm.nextQuestion();
+                        }
+                    }//for
                 }
             }
             else

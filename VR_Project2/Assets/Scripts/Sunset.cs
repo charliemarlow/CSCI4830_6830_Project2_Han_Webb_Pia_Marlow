@@ -26,6 +26,12 @@ public class Sunset : MonoBehaviour
         StartCoroutine(sunset());
     }
 
+    void setAmbientLighting(float ambientIntensity)
+    {
+        RenderSettings.reflectionIntensity = ambientIntensity;
+        RenderSettings.ambientIntensity = ambientIntensity;
+    }
+
     IEnumerator sunset()
     {
 
@@ -38,15 +44,12 @@ public class Sunset : MonoBehaviour
             if(offsetTime >= sunsetStart && offsetTime <= sunsetEnd) {
                 // scale down ambient lighting during sunset
                 ambientIntensity = (sunsetEnd - offsetTime) / scaleDownFactor;
-                RenderSettings.reflectionIntensity = ambientIntensity;
-                RenderSettings.ambientIntensity = ambientIntensity;
+                setAmbientLighting(ambientIntensity);
                 sunLight.intensity = sunLight.intensity = (totalNight - offsetTime) / (scaleDownFactor *2);
             }
             else if(offsetTime >= sunsetEnd) {
                 // turn off ambient lighting
-                RenderSettings.reflectionIntensity = 0;
-                RenderSettings.ambientIntensity = 0;
-                
+                setAmbientLighting(0.0f);
             }
 
             // set up variables for controlling sun rotation/fog settings
