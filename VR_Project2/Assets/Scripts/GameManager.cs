@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.IO;
+using System;
 
 public class GameManager : MonoBehaviour
 {
@@ -17,6 +19,8 @@ public class GameManager : MonoBehaviour
     private Survey currentSurvey;
     private Renderer lastColored;
     private float timeSinceLastSurvey;
+    private RaycastHit lastHit;
+    private int surveyNumber = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +28,16 @@ public class GameManager : MonoBehaviour
         surveyInUse = false;
         lastColored = null;
         timeSinceLastSurvey = 0f;
+
+        string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+        string finalDestination = filePath + @"\darkRoomResults.txt";
+        if (File.Exists(finalDestination))
+        {
+            File.Delete(finalDestination);
+
+        }
+        File.Create(finalDestination);
+
     }
 
     void instantiateNewSurvey()
@@ -37,6 +51,10 @@ public class GameManager : MonoBehaviour
         laserRight.surveyTime = on;
         laserLeft.surveyTime = on;
         surveyInUse = on;
+        if (on)
+        {
+            surveyNumber++;
+        }
     }
 
     public void changeColor(RaycastHit hit)
@@ -49,6 +67,7 @@ public class GameManager : MonoBehaviour
         Renderer render = cube.GetComponent<Renderer>();
         render.material = laserColor;
         lastColored = render;
+        lastHit = hit;
     }
 
     public void nextQuestion()
@@ -60,6 +79,7 @@ public class GameManager : MonoBehaviour
  
         lastColored.material = unlitWhite;
         lastColored = null;
+        currentSurvey.logResult(lastHit, surveyNumber);
         currentSurvey.nextQuestion();
 
     }
