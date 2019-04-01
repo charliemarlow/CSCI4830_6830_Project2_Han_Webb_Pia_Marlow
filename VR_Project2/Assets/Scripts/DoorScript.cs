@@ -6,6 +6,9 @@ public class DoorScript : MonoBehaviour
 {
     Animator anim;
     private List<DoorScript> doors = new List<DoorScript>();
+    public Collider right;
+    public Collider left;
+    public Collider key;
     public bool doorLockState;
     
     void Start()
@@ -27,12 +30,11 @@ public class DoorScript : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        if (other.name.Equals("Player") || other.name.Equals("Key"))
+        if (other == right || other == left || other == key)
         {
-            Debug.Log(other.name);
             if (doorLockState == true)
             {
-                if (other.name.Equals("Key"))
+                if (other == key)
                 {
                     Debug.Log("key used");
                     anim.SetTrigger("Open");

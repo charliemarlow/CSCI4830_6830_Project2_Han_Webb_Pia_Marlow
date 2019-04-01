@@ -18,7 +18,7 @@ public class KeyScript : MonoBehaviour
 
     void OnTriggerEnter(Collider collision)
     {
-        Debug.Log("found");
+        Debug.Log(collision.name);
         if (collision.name.Equals("LockedDoor"))
         {
             Debug.Log("used key!");

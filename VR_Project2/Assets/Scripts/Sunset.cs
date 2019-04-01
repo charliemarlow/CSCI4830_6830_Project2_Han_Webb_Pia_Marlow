@@ -75,6 +75,7 @@ public class Sunset : MonoBehaviour
             // turn off sun, exit coroutine
             if(offsetTime >= totalNight)
             {
+                Debug.Log("Lights off!");
                 sunLight.gameObject.SetActive(false);
                 isDay = false;
             }

@@ -87,7 +87,8 @@ public class GameManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Time.time - timeSinceLastSurvey >= 5 && !surveyInUse)
+        /*
+        if(Time.time - timeSinceLastSurvey >= 60 && !surveyInUse)
         {
             instantiateNewSurvey();
         }
@@ -97,6 +98,7 @@ public class GameManager : MonoBehaviour
             timeSinceLastSurvey = Time.time;
             toggleSurvey(false);
         }
+        */
 
     }
 }

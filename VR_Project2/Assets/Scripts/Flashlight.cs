@@ -22,6 +22,7 @@ public class Flashlight : MonoBehaviour
     public float intensity;
     public float lightRange;
     private float lastTimeOn = 0;
+    private int numberOfTimesUsed;
     // Start is called before the first frame update
     void Start()
     {
@@ -35,8 +36,15 @@ public class Flashlight : MonoBehaviour
 
     }
 
+    public int getNumberOfTimesUsed() {
+        return numberOfTimesUsed;
+    }
+
     public void toggleFlashlight(bool on)
     {
+        if (!isLit) {
+            numberOfTimesUsed++;
+        }
         lt.enabled = on;
         fakeLight.SetActive(on);
         isLit = on;
