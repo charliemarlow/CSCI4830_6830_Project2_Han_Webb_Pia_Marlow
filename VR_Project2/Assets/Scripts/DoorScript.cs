@@ -15,39 +15,25 @@ public class DoorScript : MonoBehaviour
     {
         anim = GetComponent<Animator>();
         doors.Add(GetComponent<DoorScript>());
+        if (doorLockState == true) {
+            name = "LockedDoor";
+        }
+        else {
+            name = "Door";
+        }
     }
     
     void Update()
     {
-        if (doorLockState == true)
-        {
-            name = "LockedDoor";
-        } else
-        {
-            name = "Door";
-        }
     }
 
     void OnTriggerEnter(Collider other)
     {
-        if (other == right || other == left || other == key)
-        {
-            if (doorLockState == true)
-            {
-                if (other == key)
-                {
-                    Debug.Log("key used");
-                    anim.SetTrigger("Open");
-                }
-            }
-            else
-            {
-                Debug.Log("door was not locked, entering");
+        if (name == "Door") {
+            if (other == right || other == left || other == key) {
+                Debug.Log("key used");
                 anim.SetTrigger("Open");
             }
-        } else
-        {
-            Debug.Log("Not a player");
         }
     }
 
