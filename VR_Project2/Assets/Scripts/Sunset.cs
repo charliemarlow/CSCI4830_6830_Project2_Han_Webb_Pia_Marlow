@@ -20,9 +20,12 @@ public class Sunset : MonoBehaviour
     public float totalNight = 58100;
     public float scaleDownFactor = 5000;
 
+    private Quaternion originalRotation;
+
     // Start is called before the first frame update
     void Start()
     {
+        originalRotation = sun.rotation;
         StartCoroutine(sunset());
     }
 
@@ -83,6 +86,14 @@ public class Sunset : MonoBehaviour
             yield return null;
         }
         yield return null;
+    }
+
+    public void turnOnLight()
+    {
+        sunLight.gameObject.SetActive(true);
+        sun.rotation = originalRotation;
+        setAmbientLighting(1);
+        sunLight.intensity = 1;
     }
 
     // Update is called once per frame

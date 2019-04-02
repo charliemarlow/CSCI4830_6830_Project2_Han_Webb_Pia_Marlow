@@ -41,8 +41,7 @@ public class Survey : MonoBehaviour
         }
         questionIndex++;
         Debug.Log("question index == " + questionIndex);
-        Debug.Log("question array Length " + questionArray.Length);
-        if (questionIndex >= questionArray.Length + 1)
+        if (questionIndex >= questionArray.Length)
         {
             Destroy(this.gameObject);
         }

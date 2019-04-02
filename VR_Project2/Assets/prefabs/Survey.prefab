@@ -62,7 +62,7 @@ GameObject:
   - component: {fileID: 4885193384557327757}
   m_Layer: 0
   m_Name: buttonText
-  m_TagString: Untagged
+  m_TagString: next
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -260,7 +260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4885193386110554456}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.07, y: 1.7, z: 3.23}
+  m_LocalPosition: {x: 5.07, y: 1.7, z: 0.33000016}
   m_LocalScale: {x: 5.275976, y: 0.860008, z: 0.48749998}
   m_Children:
   - {fileID: 4885193385898944663}
@@ -352,7 +352,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4885193386145343049}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 5.03, y: 0.34999993, z: 3.23}
+  m_LocalPosition: {x: 5.03, y: 0.34999993, z: 0.33000016}
   m_LocalScale: {x: 1, y: 0.40000004, z: 0.4875}
   m_Children:
   - {fileID: 4885193384557327746}
@@ -442,7 +442,7 @@ PrefabInstance:
     - target: {fileID: 2810451035133411094, guid: d07ebdf3bc2f2674ca073fdcb402998f,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 3.08
+      value: 0.18
       objectReference: {fileID: 0}
     - target: {fileID: 2810451035133411094, guid: d07ebdf3bc2f2674ca073fdcb402998f,
         type: 3}

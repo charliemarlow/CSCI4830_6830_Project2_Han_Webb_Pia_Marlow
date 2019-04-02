@@ -9,7 +9,6 @@ public class GameManager : MonoBehaviour
 
     public Survey surveyPrefab;
     public Transform playerLocation;
-    public Transform surveyZone;
     public LaserFingers laserRight;
     public LaserFingers laserLeft;
     private bool surveyInUse;
@@ -25,9 +24,20 @@ public class GameManager : MonoBehaviour
     private string finalDestination;
     private int batteriesUsed;
 
+    private int numberOfSurveys = 0;
+    public Transform survey1;
+    public Transform survey2;
+    public Transform survey3;
+    public Transform[] surveyZones = new Transform[3];
+
+
     // Start is called before the first frame update
     void Start()
     {
+        surveyZones[0] = survey1;
+        surveyZones[1] = survey2;
+        surveyZones[2] = survey3;
+
         surveyInUse = false;
         lastColored = null;
         timeSinceLastSurvey = 0f;
@@ -43,9 +53,19 @@ public class GameManager : MonoBehaviour
 
     }
 
-    void instantiateNewSurvey()
+    public void instantiateNewSurvey()
     {
-        currentSurvey = Instantiate(surveyPrefab, surveyZone);
+        if(surveyInUse)
+        {
+            return;
+        }
+        if (numberOfSurveys < surveyZones.Length)
+        {
+            currentSurvey = Instantiate(surveyPrefab, surveyZones[numberOfSurveys]);
+        }
+        numberOfSurveys++;
+        Debug.Log("number of surveys: " + numberOfSurveys);
+        //currentSurvey = Instantiate(surveyPrefab, surveyZone.position + (surveyZone.forward * 2),  surveyZone.rotation);
         toggleSurvey(true);
     }
 
@@ -120,13 +140,13 @@ public class GameManager : MonoBehaviour
         {
             instantiateNewSurvey();
         }
-
+        */
         if(currentSurvey == null && surveyInUse)
         {
             timeSinceLastSurvey = Time.time;
             toggleSurvey(false);
         }
-        */
+      
 
     }
 }

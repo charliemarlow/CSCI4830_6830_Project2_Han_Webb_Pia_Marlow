@@ -10,6 +10,8 @@ public class DoorScript : MonoBehaviour
     public Collider left;
     public Collider key;
     public bool doorLockState;
+    public GameManager gm;
+    private bool doorWasLocked;
     
     void Start()
     {
@@ -21,6 +23,7 @@ public class DoorScript : MonoBehaviour
         else {
             name = "Door";
         }
+        doorWasLocked = doorLockState;
     }
     
     void Update()
@@ -33,6 +36,10 @@ public class DoorScript : MonoBehaviour
             if (other == right || other == left || other == key) {
                 Debug.Log("key used");
                 anim.SetTrigger("Open");
+                if (doorWasLocked)
+                {
+                    gm.instantiateNewSurvey();
+                }
             }
         }
     }
@@ -58,4 +65,6 @@ public class DoorScript : MonoBehaviour
     {
         doorLockState = other;
     }
+
+
 }

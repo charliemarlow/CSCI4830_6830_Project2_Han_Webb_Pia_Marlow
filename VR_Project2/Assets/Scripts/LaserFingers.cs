@@ -54,18 +54,21 @@ public class LaserFingers : MonoBehaviour
                 // use index trigger to select an object
                 if (getIndexTriggerState() >= .5)
                 {
-                    for (int i = 0; i < tagArray.Length; i++)
+                    if (hit.collider.CompareTag("next"))
                     {
-                        if (hit.collider.CompareTag(tagArray[i]))
+                        gm.nextQuestion();
+                    }
+                    else
+                    {
+                        for (int i = 0; i < tagArray.Length; i++)
                         {
-                            Debug.Log("Selected Number " + tagArray[i]);
-                            gm.changeColor(hit);
-                            break;
-                        }else if (hit.collider.CompareTag("next"))
-                        {
-                            gm.nextQuestion();
-                        }
-                    }//for
+                            if (hit.collider.CompareTag(tagArray[i]))
+                            {
+                                gm.changeColor(hit);
+                                break;
+                            }
+                        }//for
+                    }
                 }
             }
             else
