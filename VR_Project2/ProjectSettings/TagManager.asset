@@ -3,7 +3,14 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - 4
+  - 5
+  - 1
+  - 2
+  - 3
+  - next
+  - breaker
   layers:
   - Default
   - TransparentFX

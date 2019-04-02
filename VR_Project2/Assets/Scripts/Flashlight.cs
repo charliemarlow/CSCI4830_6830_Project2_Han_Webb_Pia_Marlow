@@ -47,6 +47,10 @@ public class Flashlight : MonoBehaviour
 
     public float getTotalTimeUsed()
     {
+        if (isLit)
+        {
+            totalTimeUsed += (Time.time - timeSinceLastUse);
+        }
         return totalTimeUsed;
     }
 
@@ -55,11 +59,13 @@ public class Flashlight : MonoBehaviour
         if (on) {
             numberOfTimesUsed++;
             timeSinceLastUse = Time.time;
+            Debug.Log("number of times used: " + numberOfTimesUsed);
         }
         else
         {
             // current time - time it was last turned on = time on
             totalTimeUsed += (Time.time - timeSinceLastUse);
+            Debug.Log("Total time used: " + totalTimeUsed);
         }
         lt.enabled = on;
         fakeLight.SetActive(on);

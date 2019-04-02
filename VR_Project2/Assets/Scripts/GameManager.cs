@@ -122,10 +122,10 @@ public class GameManager : MonoBehaviour
         float currentTime = Time.time;
         float percentOfTimeWithFlashlight = (totalTimeUsed / currentTime) * 100;
 
-        forFile += "Amount of time the flashlight was used: " + totalTimeUsed;
+        forFile += "Amount of time the flashlight was used: " + totalTimeUsed + " seconds";
         forFile += Environment.NewLine;
 
-        forFile += "Percent of time the flashlight was used: " + percentOfTimeWithFlashlight;
+        forFile += "Percent of time the flashlight was used: " + percentOfTimeWithFlashlight + "%";
         forFile += Environment.NewLine;
 
         forFile += "Number of batteries used: " + batteriesUsed;
