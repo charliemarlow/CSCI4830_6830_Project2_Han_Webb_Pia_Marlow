@@ -1,16 +1,25 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class VRTeleporter : MonoBehaviour
 {
 
-    public GameObject positionMarker; // marker for display ground position
-    public Transform bodyTransforn; 
-    public LayerMask excludeLayers;
-    public float angle = 45f;        // Arc take off angle
-    public float strength = 10f; 
 
+    public Collider c1, c2, c3, c4, c5, key1, key2, key3;   //colliders for floors and keys
+
+    public GameObject positionMarker; // marker for display ground position
+
+    public Transform bodyTransforn; // target transferred by teleport
+
+    public LayerMask excludeLayers; // excluding for performance
+
+    public float angle = 45f; // Arc take off angle
+
+    public float strength = 10f; // Increasing this value will increase overall arc length
+
+
+    private bool floor = false;
 
     int maxVertexcount = 100; // limitation of vertices for performance. 
 
@@ -34,9 +43,10 @@ public class VRTeleporter : MonoBehaviour
     // Teleport target transform to ground position
     public void Teleport()
     {
-        if (groundDetected)
+        if (groundDetected && floor == true)
         {
             bodyTransforn.position = groundPos + lastNormal * 0.1f;
+            floor = false;
         }
         else
         {
@@ -100,9 +110,20 @@ public class VRTeleporter : MonoBehaviour
             // linecast between last vertex and current vertex
             if (Physics.Linecast(pos, newPos, out hit, ~excludeLayers))
             {
-                groundDetected = true;
-                groundPos = hit.point;
-                lastNormal = hit.normal;
+                if (hit.collider != key1 && hit.collider != key2 && hit.collider != key3)
+                {
+
+                    if (hit.collider == c1 || hit.collider == c2 || hit.collider == c3 || hit.collider == c4)
+                    {
+                        floor = true;
+                    }
+
+                    groundDetected = true;
+                    groundPos = hit.point;
+                    lastNormal = hit.normal;
+
+                }
+
             }
             pos = newPos; // update current vertex as last vertex
         }
@@ -112,8 +133,8 @@ public class VRTeleporter : MonoBehaviour
 
         if (groundDetected)
         {
-            positionMarker.transform.position = groundPos + lastNormal * 0.1f;
-            positionMarker.transform.LookAt(groundPos);
+                positionMarker.transform.position = groundPos + lastNormal * 0.1f;
+                positionMarker.transform.LookAt(groundPos);
         }
 
         // Update Line Renderer
