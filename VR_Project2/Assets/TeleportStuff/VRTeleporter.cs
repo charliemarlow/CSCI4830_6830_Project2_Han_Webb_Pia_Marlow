@@ -5,6 +5,7 @@ using UnityEngine;
 public class VRTeleporter : MonoBehaviour
 {
 
+    public AudioSource sound;
 
     public Collider c1, c2, c3, c4, c5, key1, key2, key3;   //colliders for floors and keys
 
@@ -46,8 +47,11 @@ public class VRTeleporter : MonoBehaviour
         if (groundDetected && floor == true)
         {
             bodyTransforn.position = groundPos + lastNormal * 0.1f;
+            sound.enabled = true;
             floor = false;
+            sound.enabled = false;
         }
+        
         else
         {
             Debug.Log("Ground wasn't detected");
