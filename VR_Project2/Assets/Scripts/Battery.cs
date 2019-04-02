@@ -4,9 +4,18 @@ using UnityEngine;
 
 public class Battery : MonoBehaviour
 {
+
+    private int batteriesUsed;
+    public GameManager gm;
+
+    public int getBatteriesUsed()
+    {
+        return batteriesUsed;
+    }
     // Start is called before the first frame update
     void Start()
     {
+        batteriesUsed = 0;
         
     }
 
@@ -33,7 +42,7 @@ public class Battery : MonoBehaviour
             Debug.Log("Hit By " + rb.name);
             return;
         }
-
+        gm.incrementBatteries();
         Destroy(this.gameObject);
     }
 }

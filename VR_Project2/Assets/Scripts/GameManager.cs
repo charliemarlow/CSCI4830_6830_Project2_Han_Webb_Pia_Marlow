@@ -15,12 +15,15 @@ public class GameManager : MonoBehaviour
     private bool surveyInUse;
     public Material laserColor;
     public Material unlitWhite;
+    public Flashlight flashlight;
 
     private Survey currentSurvey;
     private Renderer lastColored;
     private float timeSinceLastSurvey;
     private RaycastHit lastHit;
     private int surveyNumber = 0;
+    private string finalDestination;
+    private int batteriesUsed;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +33,7 @@ public class GameManager : MonoBehaviour
         timeSinceLastSurvey = 0f;
 
         string filePath = Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
-        string finalDestination = filePath + @"\darkRoomResults.txt";
+        finalDestination = filePath + @"\darkRoomResults.txt";
         if (File.Exists(finalDestination))
         {
             File.Delete(finalDestination);
@@ -84,6 +87,31 @@ public class GameManager : MonoBehaviour
 
     }
 
+    public void incrementBatteries()
+    {
+        batteriesUsed++;
+    }
+
+    public void end()
+    {
+        string forFile = Environment.NewLine;
+        forFile += "Number of times the flashlight was turned on: " + flashlight.getNumberOfTimesUsed();
+        forFile += Environment.NewLine;
+
+        float totalTimeUsed = flashlight.getTotalTimeUsed();
+        float currentTime = Time.time;
+        float percentOfTimeWithFlashlight = (totalTimeUsed / currentTime) * 100;
+
+        forFile += "Amount of time the flashlight was used: " + totalTimeUsed;
+        forFile += Environment.NewLine;
+
+        forFile += "Percent of time the flashlight was used: " + percentOfTimeWithFlashlight;
+        forFile += Environment.NewLine;
+
+        forFile += "Number of batteries used: " + batteriesUsed;
+        System.IO.File.AppendAllText(finalDestination, forFile);
+
+    }
     // Update is called once per frame
     void Update()
     {

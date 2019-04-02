@@ -23,9 +23,13 @@ public class Flashlight : MonoBehaviour
     public float lightRange;
     private float lastTimeOn = 0;
     private int numberOfTimesUsed;
+    private float timeSinceLastUse;
+    private float totalTimeUsed;
+    private bool isFirstTimeOn = true;
     // Start is called before the first frame update
     void Start()
     {
+        numberOfTimesUsed = 0;
         rend1 = block1.GetComponent<Renderer>();
         rend2 = block2.GetComponent<Renderer>();
         rend3 = block3.GetComponent<Renderer>();
@@ -34,16 +38,28 @@ public class Flashlight : MonoBehaviour
         lightBeam.GetComponent<Light>().enabled = false;    //initialize light to off
         toggleFlashlight(false);
 
+
     }
 
     public int getNumberOfTimesUsed() {
         return numberOfTimesUsed;
     }
 
+    public float getTotalTimeUsed()
+    {
+        return totalTimeUsed;
+    }
+
     public void toggleFlashlight(bool on)
     {
-        if (!isLit) {
+        if (on) {
             numberOfTimesUsed++;
+            timeSinceLastUse = Time.time;
+        }
+        else
+        {
+            // current time - time it was last turned on = time on
+            totalTimeUsed += (Time.time - timeSinceLastUse);
         }
         lt.enabled = on;
         fakeLight.SetActive(on);
@@ -162,4 +178,5 @@ public class Flashlight : MonoBehaviour
         Debug.Log("Batteries replaced.");
         batteryLevel = 3;
     }
+
 }
