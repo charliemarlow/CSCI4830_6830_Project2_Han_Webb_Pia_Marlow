@@ -4,10 +4,12 @@ using UnityEngine;
 
 public class Flashlight : MonoBehaviour
 {
+    public AudioSource sound;
     public OVRGrabber left;
     public OVRGrabber right;
     public OVRGrabbable grabbableFlashlight;
 
+    public float batteryTime;                  //time for each battery level
     public int batteryLevel;                   //level of charge in battery
     public GameObject bar;                     //battery indicator bar
     public GameObject block1, block2, block3;  //blocks for each charge level
@@ -161,6 +163,18 @@ public class Flashlight : MonoBehaviour
             lastTimeOn = Time.time;
         }
 
+        if (isLit)
+        {
+            float timeOn = Time.time - timeSinceLastUse ;
+            if(timeOn > batteryTime)
+            {
+                batteryLevel--;
+                totalTimeUsed += (Time.time - timeSinceLastUse);
+                timeSinceLastUse = Time.time;
+
+            }
+        }
+
         updateBatteryLevel();
        
     }
@@ -181,6 +195,7 @@ public class Flashlight : MonoBehaviour
             return;
         }
 
+        sound.Play();
         Debug.Log("Batteries replaced.");
         batteryLevel = 3;
     }

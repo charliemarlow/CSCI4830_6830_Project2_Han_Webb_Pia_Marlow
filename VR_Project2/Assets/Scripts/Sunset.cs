@@ -19,6 +19,7 @@ public class Sunset : MonoBehaviour
     public float sunsetEnd = 54000;
     public float totalNight = 58100;
     public float scaleDownFactor = 5000;
+    private bool isDay = true;
 
     private Quaternion originalRotation;
 
@@ -38,7 +39,6 @@ public class Sunset : MonoBehaviour
     IEnumerator sunset()
     {
 
-        bool isDay = true;
         while (isDay)
         {
             time += Time.deltaTime * speed;
@@ -90,10 +90,12 @@ public class Sunset : MonoBehaviour
 
     public void turnOnLight()
     {
+        isDay = false;
         sunLight.gameObject.SetActive(true);
         sun.rotation = originalRotation;
         setAmbientLighting(1);
         sunLight.intensity = 1;
+
     }
 
     // Update is called once per frame

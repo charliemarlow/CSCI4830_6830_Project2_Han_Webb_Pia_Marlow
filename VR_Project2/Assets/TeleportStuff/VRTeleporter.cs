@@ -7,7 +7,7 @@ public class VRTeleporter : MonoBehaviour
 
     public AudioSource sound;
 
-    public Collider c1, c2, c3, c4, c5, key1, key2, key3;   //colliders for floors and keys
+    public Collider c1, c2, c3, c4, c5, key1, key2, key3, key4;   //colliders for floors and keys
 
     public GameObject positionMarker; // marker for display ground position
 
@@ -47,9 +47,8 @@ public class VRTeleporter : MonoBehaviour
         if (groundDetected && floor == true)
         {
             bodyTransforn.position = groundPos + lastNormal * 0.1f;
-            sound.enabled = true;
+            sound.Play();
             floor = false;
-            sound.enabled = false;
         }
         
         else
@@ -114,10 +113,10 @@ public class VRTeleporter : MonoBehaviour
             // linecast between last vertex and current vertex
             if (Physics.Linecast(pos, newPos, out hit, ~excludeLayers))
             {
-                if (hit.collider != key1 && hit.collider != key2 && hit.collider != key3)
+                if (hit.collider != key1 && hit.collider != key2 && hit.collider != key3 && hit.collider != key3)
                 {
 
-                    if (hit.collider == c1 || hit.collider == c2 || hit.collider == c3 || hit.collider == c4)
+                    if (hit.collider == c1 || hit.collider == c2 || hit.collider == c3 || hit.collider == c4 || hit.collider == c5)
                     {
                         floor = true;
                     }
